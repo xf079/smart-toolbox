@@ -86,107 +86,99 @@ export function DeviceInfo() {
   };
 
   return (
-    <Card className='m-4 p-4 border-b'>
-      <div className='flex items-center justify-between'>
-        <div className='flex items-center space-x-4'>
-          {/* 用户头像和昵称 */}
-          <div className='flex items-center space-x-3'>
-            <div className='relative group'>
-              <Avatar className='h-10 w-10 cursor-pointer'>
-                <AvatarImage src={avatarUrl} alt={nickname} />
-                <AvatarFallback className='bg-primary/10 text-primary'>
-                  {avatarUrl ? (
-                    <User className='h-5 w-5' />
-                  ) : (
-                    getInitials(nickname)
-                  )}
-                </AvatarFallback>
-              </Avatar>
-              <input
-                type='file'
-                accept='image/*'
-                onChange={handleAvatarChange}
-                className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
-                title='点击更换头像'
-              />
-            </div>
-
-            <div className='flex flex-col'>
-              {isEditingNickname ? (
-                <div className='flex items-center space-x-2'>
-                  <Input
-                    value={tempNickname}
-                    onChange={e => setTempNickname(e.target.value)}
-                    className='h-6 text-sm w-24'
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') handleNicknameSave();
-                      if (e.key === 'Escape') handleNicknameCancel();
-                    }}
-                    autoFocus
-                  />
-                  <Button
-                    variant='ghost'
-                    size='sm'
-                    className='h-6 w-6 p-0'
-                    onClick={handleNicknameSave}
-                  >
-                    <Check className='h-3 w-3' />
-                  </Button>
-                </div>
-              ) : (
-                <div className='flex items-center space-x-2 group'>
-                  <span className='font-medium text-sm'>{nickname}</span>
-                  <Button
-                    variant='ghost'
-                    size='sm'
-                    className='h-4 w-4 p-0 opacity-0 group-hover:opacity-100 transition-opacity'
-                    onClick={handleNicknameEdit}
-                  >
-                    <Edit2 className='h-3 w-3' />
-                  </Button>
-                </div>
-              )}
-              <span className='text-xs text-muted-foreground'>
-                {deviceName}
-              </span>
-            </div>
+    <div className='px-2.5 py-4 flex items-center justify-between'>
+      <div className='flex items-center space-x-4'>
+        {/* 用户头像和昵称 */}
+        <div className='flex items-center space-x-3'>
+          <div className='relative group'>
+            <Avatar className='h-10 w-10 cursor-pointer'>
+              <AvatarImage src={avatarUrl} alt={nickname} />
+              <AvatarFallback className='bg-primary/10 text-primary'>
+                {avatarUrl ? (
+                  <User className='h-5 w-5' />
+                ) : (
+                  getInitials(nickname)
+                )}
+              </AvatarFallback>
+            </Avatar>
+            <input
+              type='file'
+              accept='image/*'
+              onChange={handleAvatarChange}
+              className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
+              title='点击更换头像'
+            />
           </div>
 
-          {/* 在线状态 */}
-          <div className='flex items-center space-x-2'>
-            <Wifi className='h-4 w-4 text-green-500' />
-            <Badge variant='secondary' className='text-sm'>
-              在线
-            </Badge>
+          <div className='flex flex-col'>
+            {isEditingNickname ? (
+              <div className='flex items-center space-x-2'>
+                <Input
+                  value={tempNickname}
+                  onChange={e => setTempNickname(e.target.value)}
+                  className='h-6 text-sm w-24'
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') handleNicknameSave();
+                    if (e.key === 'Escape') handleNicknameCancel();
+                  }}
+                  autoFocus
+                />
+                <Button
+                  variant='ghost'
+                  size='sm'
+                  className='h-6 w-6 p-0'
+                  onClick={handleNicknameSave}
+                >
+                  <Check className='h-3 w-3' />
+                </Button>
+              </div>
+            ) : (
+              <div className='flex items-center space-x-2 group'>
+                <span className='font-medium text-sm'>{nickname}</span>
+                <Button
+                  variant='ghost'
+                  size='sm'
+                  className='h-4 w-4 p-0 opacity-0 group-hover:opacity-100 transition-opacity'
+                  onClick={handleNicknameEdit}
+                >
+                  <Edit2 className='h-3 w-3' />
+                </Button>
+              </div>
+            )}
+            <span className='text-xs text-muted-foreground'>{deviceName}</span>
           </div>
         </div>
 
-        <div className='flex items-center space-x-4'>
-          {/* IP地址信息 */}
-          <div className='text-sm text-muted-foreground'>
-            <span>IP地址: </span>
-            <span className='font-mono font-medium'>
-              {ipAddress}:{port}
-            </span>
-            <Button
-              variant='ghost'
-              size='sm'
-              className='ml-2 h-6 w-6 p-0'
-              onClick={() => copyToClipboard(`${ipAddress}:${port}`)}
-            >
-              {copied ? (
-                <Check className='h-3 w-3 text-green-500' />
-              ) : (
-                <Copy className='h-3 w-3' />
-              )}
-            </Button>
-          </div>
-
-          <Badge variant='outline' className='text-xs'>
-            LocalSend兼容
+        {/* 在线状态 */}
+        <div className='flex items-center space-x-2'>
+          <Wifi className='h-4 w-4 text-green-500' />
+          <Badge variant='secondary' className='text-xs text-muted-foreground'>
+            在线
           </Badge>
         </div>
       </div>
-    </Card>
+
+      <div className='flex items-center space-x-4'>
+        {/* IP地址信息 */}
+        <div className='text-sm text-muted-foreground'>
+          <span>IP地址: </span>
+          <span className='font-mono font-medium'>
+            {ipAddress}:{port}
+          </span>
+          <Button
+            variant='ghost'
+            size='sm'
+            className='ml-2 h-6 w-6 p-0'
+            onClick={() => copyToClipboard(`${ipAddress}:${port}`)}
+          >
+            {copied ? (
+              <Check className='h-3 w-3 text-green-500' />
+            ) : (
+              <Copy className='h-3 w-3' />
+            )}
+          </Button>
+        </div>
+      </div>
+    </div>
   );
-} 
+}

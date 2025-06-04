@@ -116,15 +116,13 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className='max-w-2xl max-h-[80vh] overflow-y-auto'>
+      <DialogContent className='w-5xl max-h-[80vh] overflow-y-auto'>
         <DialogHeader>
           <DialogTitle className='flex items-center space-x-2'>
             <Settings className='h-5 w-5' />
             <span>应用设置</span>
           </DialogTitle>
-          <DialogDescription>
-            配置文件传输和应用行为设置
-          </DialogDescription>
+          <DialogDescription>配置文件传输和应用行为设置</DialogDescription>
         </DialogHeader>
 
         <div className='space-y-6'>
@@ -134,7 +132,7 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
               <Download className='h-4 w-4' />
               <h3 className='font-semibold'>文件传输</h3>
             </div>
-            
+
             <div className='space-y-4'>
               <div className='space-y-2'>
                 <Label htmlFor='download-path'>下载文件夹</Label>
@@ -142,7 +140,9 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
                   <Input
                     id='download-path'
                     value={settings.downloadPath}
-                    onChange={e => saveSettings({ downloadPath: e.target.value })}
+                    onChange={e =>
+                      saveSettings({ downloadPath: e.target.value })
+                    }
                     className='flex-1'
                   />
                   <Button variant='outline' onClick={selectDownloadPath}>
@@ -165,7 +165,9 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
                 <Label htmlFor='compression'>压缩级别</Label>
                 <Select
                   value={settings.compressionLevel}
-                  onValueChange={value => saveSettings({ compressionLevel: value })}
+                  onValueChange={value =>
+                    saveSettings({ compressionLevel: value })
+                  }
                 >
                   <SelectTrigger>
                     <SelectValue />
@@ -188,7 +190,9 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
                 </div>
                 <Switch
                   checked={settings.autoAcceptFiles}
-                  onCheckedChange={checked => saveSettings({ autoAcceptFiles: checked })}
+                  onCheckedChange={checked =>
+                    saveSettings({ autoAcceptFiles: checked })
+                  }
                 />
               </div>
             </div>
@@ -200,7 +204,7 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
               <Wifi className='h-4 w-4' />
               <h3 className='font-semibold'>网络设置</h3>
             </div>
-            
+
             <div className='space-y-4'>
               <div className='space-y-2'>
                 <Label htmlFor='port'>监听端口</Label>
@@ -221,7 +225,9 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
                 </div>
                 <Switch
                   checked={settings.autoStartServer}
-                  onCheckedChange={checked => saveSettings({ autoStartServer: checked })}
+                  onCheckedChange={checked =>
+                    saveSettings({ autoStartServer: checked })
+                  }
                 />
               </div>
             </div>
@@ -233,7 +239,7 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
               <Shield className='h-4 w-4' />
               <h3 className='font-semibold'>安全设置</h3>
             </div>
-            
+
             <div className='space-y-4'>
               <div className='flex items-center justify-between'>
                 <div className='space-y-0.5'>
@@ -245,7 +251,9 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
                 <div className='flex items-center space-x-2'>
                   <Switch
                     checked={settings.enableEncryption}
-                    onCheckedChange={checked => saveSettings({ enableEncryption: checked })}
+                    onCheckedChange={checked =>
+                      saveSettings({ enableEncryption: checked })
+                    }
                   />
                   <Badge variant='secondary' className='text-xs'>
                     推荐
@@ -261,13 +269,17 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
               <Palette className='h-4 w-4' />
               <h3 className='font-semibold'>界面设置</h3>
             </div>
-            
+
             <div className='space-y-4'>
               <div className='space-y-2'>
                 <Label htmlFor='theme'>主题</Label>
                 <Select
                   value={settings.theme}
-                  onValueChange={value => saveSettings({ theme: value as 'light' | 'dark' | 'system' })}
+                  onValueChange={value =>
+                    saveSettings({
+                      theme: value as 'light' | 'dark' | 'system',
+                    })
+                  }
                 >
                   <SelectTrigger>
                     <SelectValue />
@@ -284,7 +296,9 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
                 <Label htmlFor='language'>语言</Label>
                 <Select
                   value={settings.language}
-                  onValueChange={value => saveSettings({ language: value as 'zh' | 'en' })}
+                  onValueChange={value =>
+                    saveSettings({ language: value as 'zh' | 'en' })
+                  }
                 >
                   <SelectTrigger>
                     <SelectValue />
@@ -305,7 +319,9 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
                 </div>
                 <Switch
                   checked={settings.showNotifications}
-                  onCheckedChange={checked => saveSettings({ showNotifications: checked })}
+                  onCheckedChange={checked =>
+                    saveSettings({ showNotifications: checked })
+                  }
                 />
               </div>
             </div>
@@ -325,12 +341,10 @@ export function SettingsDialog({ children }: SettingsDialogProps) {
                 重置设置
               </Button>
             </div>
-            <Button onClick={() => setOpen(false)}>
-              完成
-            </Button>
+            <Button onClick={() => setOpen(false)}>完成</Button>
           </div>
         </div>
       </DialogContent>
     </Dialog>
   );
-} 
+}

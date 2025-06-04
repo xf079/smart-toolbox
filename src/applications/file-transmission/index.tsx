@@ -47,7 +47,7 @@ export function FileTransmission() {
         <Sidebar onViewChange={setCurrentView} currentView={currentView} />
 
         {/* 右侧主要内容区 */}
-        {renderMainContent()}
+        <div className='w-full'>{renderMainContent()}</div>
       </div>
     </div>
   );
