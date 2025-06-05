@@ -1,8 +1,7 @@
 import { app, BrowserWindow } from 'electron';
-import path from 'node:path';
+import path, { join } from 'node:path';
 import started from 'electron-squirrel-startup';
 import { dirname } from './utils/path.ts';
-import { PRELOAD_SCRIPTS } from './utils/constants.ts';
 import { SignallingService } from './services/signalling';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -14,15 +13,15 @@ if (started) {
 const signallingService = new SignallingService();
 
 const createWindow = () => {
-  console.log(PRELOAD_SCRIPTS);
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
     webPreferences: {
-      // preload: join(__dirname, 'preload/index.js'),
+      preload: join(dirname, 'preload/index.js'),
       nodeIntegration: false,
       contextIsolation: true,
+      nodeIntegrationInWorker: true,
     },
   });
 

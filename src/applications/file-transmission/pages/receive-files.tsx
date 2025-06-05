@@ -3,15 +3,15 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Download, 
-  FileText, 
-  Image, 
-  Video, 
+import {
+  Download,
+  FileText,
+  Image,
+  Video,
   Music,
   Archive,
   X,
-  Check
+  Check,
 } from 'lucide-react';
 
 interface FileTransfer {
@@ -25,7 +25,7 @@ interface FileTransfer {
 }
 
 export function ReceiveFiles() {
-  const [transfers, setTransfers] = useState<FileTransfer[]>([
+  const [transfers] = useState<FileTransfer[]>([
     {
       id: '1',
       name: '示例文档.pdf',
@@ -33,7 +33,7 @@ export function ReceiveFiles() {
       type: 'application/pdf',
       progress: 65,
       status: 'transferring',
-      sender: 'iPhone (192.168.1.101)'
+      sender: 'iPhone (192.168.1.101)',
     },
     {
       id: '2',
@@ -42,15 +42,16 @@ export function ReceiveFiles() {
       type: 'image/jpeg',
       progress: 100,
       status: 'completed',
-      sender: 'MacBook (192.168.1.102)'
-    }
+      sender: 'MacBook (192.168.1.102)',
+    },
   ]);
 
   const getFileIcon = (type: string) => {
     if (type.startsWith('image/')) return <Image className='h-5 w-5' />;
     if (type.startsWith('video/')) return <Video className='h-5 w-5' />;
     if (type.startsWith('audio/')) return <Music className='h-5 w-5' />;
-    if (type.includes('zip') || type.includes('rar')) return <Archive className='h-5 w-5' />;
+    if (type.includes('zip') || type.includes('rar'))
+      return <Archive className='h-5 w-5' />;
     return <FileText className='h-5 w-5' />;
   };
 
@@ -69,7 +70,11 @@ export function ReceiveFiles() {
       case 'transferring':
         return <Badge variant='default'>传输中</Badge>;
       case 'completed':
-        return <Badge variant='outline' className='text-green-600 border-green-600'>已完成</Badge>;
+        return (
+          <Badge variant='outline' className='text-green-600 border-green-600'>
+            已完成
+          </Badge>
+        );
       case 'failed':
         return <Badge variant='destructive'>失败</Badge>;
     }
@@ -111,13 +116,13 @@ export function ReceiveFiles() {
       {transfers.length > 0 && (
         <div className='space-y-4'>
           <h3 className='text-lg font-semibold'>传输记录</h3>
-          {transfers.map((transfer) => (
+          {transfers.map(transfer => (
             <Card key={transfer.id} className='p-4'>
               <div className='flex items-center space-x-4'>
                 <div className='text-muted-foreground'>
                   {getFileIcon(transfer.type)}
                 </div>
-                
+
                 <div className='flex-1 min-w-0'>
                   <div className='flex items-center justify-between mb-2'>
                     <div>
@@ -138,7 +143,7 @@ export function ReceiveFiles() {
                       </Button>
                     </div>
                   </div>
-                  
+
                   {transfer.status === 'transferring' && (
                     <div className='space-y-1'>
                       <Progress value={transfer.progress} className='h-2' />
@@ -155,4 +160,4 @@ export function ReceiveFiles() {
       )}
     </div>
   );
-} 
+}

@@ -3,11 +3,11 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Upload, 
-  FileText, 
-  Image, 
-  Video, 
+import {
+  Upload,
+  FileText,
+  Image,
+  Video,
   Music,
   Archive,
   X,
@@ -15,7 +15,7 @@ import {
   Smartphone,
   Monitor,
   Laptop,
-  Plus
+  Plus,
 } from 'lucide-react';
 
 interface SelectedFile {
@@ -42,22 +42,22 @@ export function SendFiles() {
       name: 'iPhone',
       ip: '192.168.1.101',
       type: 'phone',
-      online: true
+      online: true,
     },
     {
       id: '2',
       name: 'MacBook Pro',
       ip: '192.168.1.102',
       type: 'computer',
-      online: true
+      online: true,
     },
     {
       id: '3',
       name: 'Windows PC',
       ip: '192.168.1.103',
       type: 'computer',
-      online: false
-    }
+      online: false,
+    },
   ]);
   const [selectedDevice, setSelectedDevice] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -71,7 +71,7 @@ export function SendFiles() {
       name: file.name,
       size: file.size,
       type: file.type,
-      file
+      file,
     }));
 
     setSelectedFiles(prev => [...prev, ...newFiles]);
@@ -85,7 +85,8 @@ export function SendFiles() {
     if (type.startsWith('image/')) return <Image className='h-5 w-5' />;
     if (type.startsWith('video/')) return <Video className='h-5 w-5' />;
     if (type.startsWith('audio/')) return <Music className='h-5 w-5' />;
-    if (type.includes('zip') || type.includes('rar')) return <Archive className='h-5 w-5' />;
+    if (type.includes('zip') || type.includes('rar'))
+      return <Archive className='h-5 w-5' />;
     return <FileText className='h-5 w-5' />;
   };
 
@@ -168,8 +169,11 @@ export function SendFiles() {
             </div>
           </div>
           <div className='space-y-2 max-h-60 overflow-y-auto'>
-            {selectedFiles.map((file) => (
-              <div key={file.id} className='flex items-center justify-between p-2 bg-muted/50 rounded'>
+            {selectedFiles.map(file => (
+              <div
+                key={file.id}
+                className='flex items-center justify-between p-2 bg-muted/50 rounded'
+              >
                 <div className='flex items-center space-x-3'>
                   <div className='text-muted-foreground'>
                     {getFileIcon(file.type)}
@@ -198,7 +202,7 @@ export function SendFiles() {
       <Card className='p-4'>
         <h3 className='text-lg font-semibold mb-4'>选择目标设备</h3>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-          {devices.map((device) => (
+          {devices.map(device => (
             <div
               key={device.id}
               className={`p-3 border rounded-lg cursor-pointer transition-colors ${
@@ -240,4 +244,4 @@ export function SendFiles() {
       </div>
     </div>
   );
-} 
+}
